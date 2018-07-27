@@ -7,18 +7,22 @@ const bookmarkList = (function(){
     if(item.expand){return `
     <li class="js-item-element" data-item-id="${item.id}">
     <h1>${item.title}</h1>
-    <span>Rating: ${item.url}</span
+    <span>Rating: ${item.rating}</span>
         <div class="bookmark-item-controls">
         <button class="bookmark-item-delete js-item-delete">
           <span class="button-label">delete</span>
         </button>
       </div>
+      <span>
+      Description: ${item.desc} 
+      <a href=${item.url}>Visit Site</a>
+      </span>
     </li>`;}
     
     return `
       <li class="js-item-element" data-item-id="${item.id}">
       <h1>${item.title}</h1>
-      <span>Rating: ${item.rating}</span
+      <span>Rating: ${item.rating}</span>
           <div class="bookmark-item-controls">
           <button class="bookmark-item-delete js-item-delete">
             <span class="button-label">delete</span>
@@ -92,6 +96,16 @@ const bookmarkList = (function(){
 
     });
   }
+
+  function handleSortClicked(){
+    var mySelect = document.getElementById('js-bookmark-sort');
+
+    mySelect.onchange = function() {
+       var x = document.getElementById("js-bookmark-sort").value;
+       console.log(x);
+     }
+    }
+
   
 
   /*
@@ -108,6 +122,7 @@ const bookmarkList = (function(){
     handleNewItemSubmit();
     handleItemExpandClicked();
     handleDeleteItemClicked();
+    handleSortClicked();
   }
 
   return {

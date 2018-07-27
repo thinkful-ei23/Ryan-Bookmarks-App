@@ -12,20 +12,30 @@
   <div class="container">
     <h1>Bookmark List</h1>
     <form id="js-bookmark-list-form">
-      <label for="bookmark-list-entry">Create a Bookmark: </label>
-
+      <span class = "error-container"></span>
+   
+      <label for="bookmark-list-entry"><h3>Create a Bookmark:</h3> </label>
+      <span class = "js-bookmark-form">
         <div>
+          <label> Name:
         <input type="text" name="bookmark-list-name" class="js-bookmark-list-name" placeholder="Name">
-
+              </label>
         </div>
 
          <div>
+            <label> URL:
         <input type="text" name="bookmark-list-url" class="js-bookmark-list-url" placeholder="URL">
+      </label>
+
         </div>
 
         <div>
+            <label> Description:
           <input type="text" name="bookmark-list-desc" class="js-bookmark-list-desc" placeholder="Desc.">
+        </label>
+
           </div>
+        </span>
 
         <select class="js-bookmark-list-rating">
           <option value=1>Rating: 1</option>
@@ -39,7 +49,7 @@
         <button type="submit">Add item</button>
 
     </form>
-    <h2>Sort: </h2>
+    <h3>Filter: </h3>
     <select name = "rating-sort" id="js-bookmark-sort" size = "5">
       <option value=1>Display all ratings</option>
       <option value=2>Display ratings two or above</option>

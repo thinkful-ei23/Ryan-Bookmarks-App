@@ -2,6 +2,11 @@
 
 
 const store = (function(){
+
+  const setError = function(error) {
+    this.error = error;
+  };
+
   const addItem = function(item) {
     this.items.push(item);
     console.log(store);
@@ -24,6 +29,11 @@ const store = (function(){
 
   return {
     items: [],
+    sortValue: 1,
+    error:null,
+    create: null,
+
+    setError,
     addItem,
     findById,
     findAndDelete,

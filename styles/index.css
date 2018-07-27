@@ -34,8 +34,25 @@ button:hover {
 
 .bookmark-list > li {
   margin-bottom: 20px;
-  border: 1px solid grey;
+  border: 3px solid grey;
   padding: 20px;
+  cursor:pointer;
+
+}
+
+.item-description{
+  display: block;
+
+}
+.js-bookmark-list-rating{
+  display: inline;
+  width: 50%;
+
+}
+
+.js-bookmark-form{
+  display: inline;
+width: 50%;
 }
 
 .bookmark-item {
@@ -44,4 +61,17 @@ button:hover {
   font-style: italic;
   font-size: 20px;
   margin-bottom: 15px;
+}
+
+@media only screen and (min-width: 640px) {
+    .container{
+      width:100%;
+      
+    }
+
+    .js-bookmark-list-rating{
+      display: block;
+    
+    }
+
 }

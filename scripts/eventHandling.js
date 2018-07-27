@@ -2,33 +2,53 @@
 
 const bookmarkList = (function(){
 
+  function generateError(err) {
+    /*let message = '';
+    if (err.responseJSON && err.responseJSON.message) {
+      message = err.responseJSON.message;
+    } else {
+      message = `${err.code} Server Error`;
+    }*/
+
+    return `
+      <section class="error-content">
+        <button id="cancel-error">X</button>
+        <p>${err}</p>
+      </section>
+    `;
+  }
+
+
   function generateItemElement(item) {
-    
+  if(item.rating >= store.sortValue){ 
     if(item.expand){return `
     <li class="js-item-element" data-item-id="${item.id}">
     <h1>${item.title}</h1>
-    <span>Rating: ${item.rating}</span>
-        <div class="bookmark-item-controls">
-        <button class="bookmark-item-delete js-item-delete">
-          <span class="button-label">delete</span>
-        </button>
-      </div>
-      <span>
-      Description: ${item.desc} 
-      <a href=${item.url}>Visit Site</a>
+    <div class="bookmark-item-controls">
+    <button class="bookmark-item-delete js-item-delete">
+      <span class="button-label">delete</span>
+    </button>
+  </div>
+  <span><font size = "+1">Rating:</font> ${item.rating}</span>
+
+      <span class = "item-description">
+     <font size = "+1"> Description:</font> ${item.desc} 
+      <a class = "item-description" href=${item.url}>Visit Site</a>
       </span>
     </li>`;}
     
     return `
       <li class="js-item-element" data-item-id="${item.id}">
       <h1>${item.title}</h1>
-      <span>Rating: ${item.rating}</span>
-          <div class="bookmark-item-controls">
-          <button class="bookmark-item-delete js-item-delete">
-            <span class="button-label">delete</span>
-          </button>
-        </div>
+      <div class="bookmark-item-controls">
+      <button class="bookmark-item-delete js-item-delete">
+        <span class="button-label">delete</span>
+      </button>
+    </div>
+      <span><font size = "+1">Rating:</font> ${item.rating}</span>
+
       </li>`;
+  }
   }
   
   
@@ -39,8 +59,17 @@ const bookmarkList = (function(){
   
   
   function render() {
+
+    console.log(store);
+
+    if (store.error) {
+      const el = generateError(store.error);
+      $('.error-container').html(el);
+    } else {
+      $('.error-container').empty();
+    }
+
     let items = store.items;  
-    console.log('`render` ran');
     const bookmarkListItemsString = generateBookmarkItemsString(items);
     $('.js-bookmark-list').html(bookmarkListItemsString);
   }
@@ -56,7 +85,17 @@ const bookmarkList = (function(){
 
 
      
-      api.createItem(newItemName,newItemUrl, newItemDesc, newItemRating, (newItemName) => {
+      api.createItem(newItemName,newItemUrl, newItemDesc, newItemRating, 
+        
+        
+        (err) => {
+          console.log(err.responseJSON.message);
+          store.setError(err.responseJSON.message);
+          render();
+      },
+        
+        
+        (newItemName) => {
         store.addItem(newItemName);
         render();
       });
@@ -103,7 +142,10 @@ const bookmarkList = (function(){
     mySelect.onchange = function() {
        var x = document.getElementById("js-bookmark-sort").value;
        console.log(x);
-     }
+       store.sortValue=x;
+      render();
+      }
+
     }
 
   

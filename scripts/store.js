@@ -16,12 +16,18 @@ const store = (function(){
     this.items = this.items.filter(item => item.id !== id);
   };
 
+  const findAndUpdate = function(id, newData) {
+    const item = this.findById(id);
+    Object.assign(item, newData);
+  };
+
 
   return {
     items: [],
     addItem,
     findById,
     findAndDelete,
+    findAndUpdate,
   };
   
 }());

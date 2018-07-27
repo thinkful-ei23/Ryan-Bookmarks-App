@@ -3,10 +3,22 @@
 const bookmarkList = (function(){
 
   function generateItemElement(item) {
+    
+    if(item.expand){return `
+    <li class="js-item-element" data-item-id="${item.id}">
+    <h1>${item.title}</h1>
+    <span>Rating: ${item.url}</span
+        <div class="bookmark-item-controls">
+        <button class="bookmark-item-delete js-item-delete">
+          <span class="button-label">delete</span>
+        </button>
+      </div>
+    </li>`;}
+    
     return `
       <li class="js-item-element" data-item-id="${item.id}">
       <h1>${item.title}</h1>
-      <span>${item.url}</span
+      <span>Rating: ${item.rating}</span
           <div class="bookmark-item-controls">
           <button class="bookmark-item-delete js-item-delete">
             <span class="button-label">delete</span>
@@ -36,9 +48,11 @@ const bookmarkList = (function(){
       const newItemName = $('.js-bookmark-list-name').val();
       const newItemUrl = $('.js-bookmark-list-url').val();
       const newItemDesc = $('.js-bookmark-list-desc').val();
+      const newItemRating = $('.js-bookmark-list-rating').val();
+
 
      
-      api.createItem(newItemName,newItemUrl, newItemDesc, (newItemName) => {
+      api.createItem(newItemName,newItemUrl, newItemDesc, newItemRating, (newItemName) => {
         store.addItem(newItemName);
         render();
       });
@@ -61,13 +75,12 @@ const bookmarkList = (function(){
       const id = getItemIdFromElement(event.currentTarget);
       const item = store.findById(id);
       const objExpand = {expand: !item.expand};
-      api.updateItem(id, objExpand, () => {
         store.findAndUpdate(id, objExpand);
         render();
-      }
-      );
+      
     });
-  }
+  
+}
   
   function handleDeleteItemClicked() {
     $('.js-bookmark-list').on('click', '.js-item-delete', event => {
@@ -93,7 +106,7 @@ const bookmarkList = (function(){
   
   function bindEventListeners() {
     handleNewItemSubmit();
-    //handleItemExpandClicked();
+    handleItemExpandClicked();
     handleDeleteItemClicked();
   }
 

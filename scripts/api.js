@@ -10,8 +10,8 @@ const api = (function () {
     $.getJSON(`${BASE_URL}`, callback); 
   };
 
-  const createItem = function(name, url, desc, callback) {
-    const newItem = JSON.stringify({title: name, url: url, desc: desc});
+  const createItem = function(name, url, desc, rating, callback) {
+    const newItem = JSON.stringify({title: name, url: url, desc: desc,rating:rating});
   
     $.ajax( {
       url: `${BASE_URL}`,

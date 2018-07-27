@@ -5,8 +5,9 @@ const bookmarkList = (function(){
   function generateItemElement(item) {
     return `
       <li class="js-item-element" data-item-id="${item.id}">
-      <h1>${item.name}</h1>
-        <div class="bookmark-item-controls">
+      <h1>${item.title}</h1>
+      <span>${item.url}</span
+          <div class="bookmark-item-controls">
           <button class="bookmark-item-delete js-item-delete">
             <span class="button-label">delete</span>
           </button>
@@ -32,13 +33,20 @@ const bookmarkList = (function(){
   function handleNewItemSubmit() {
     $('#js-bookmark-list-form').submit(function (event) {
       event.preventDefault();
-      const newItemName = $('.js-bookmark-list-entry').val();
-      console.log(newItemName);
-      api.createItem(newItemName, (newItemName) => {
+      const newItemName = $('.js-bookmark-list-name').val();
+      const newItemUrl = $('.js-bookmark-list-url').val();
+      const newItemDesc = $('.js-bookmark-list-desc').val();
+
+     
+      api.createItem(newItemName,newItemUrl, newItemDesc, (newItemName) => {
         store.addItem(newItemName);
         render();
       });
-      $('.js-bookmark-list-entry').val('');
+      $('.js-bookmark-list-name').val('');
+      $('.js-bookmark-list-url').val('');
+      $('.js-bookmark-list-desc').val('');
+
+
     });
   }
   
@@ -49,7 +57,7 @@ const bookmarkList = (function(){
   }
   
   function handleItemExpandClicked() {
-    $('.js-bookmark-list').on('click', '.js-item-toggle', event => {
+    $('.js-bookmark-list').on('click', '.js-item-element', event => {
       const id = getItemIdFromElement(event.currentTarget);
       const item = store.findById(id);
       const objExpand = {expand: !item.expand};
@@ -85,7 +93,7 @@ const bookmarkList = (function(){
   
   function bindEventListeners() {
     handleNewItemSubmit();
-    handleItemExpandClicked();
+    //handleItemExpandClicked();
     handleDeleteItemClicked();
   }
 

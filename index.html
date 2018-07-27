@@ -15,16 +15,16 @@
       <label for="bookmark-list-entry">Create a Bookmark: </label>
 
         <div>
-        <input type="text" name="bookmark-list-name" class="js-bookmark-list-entry" placeholder="Name">
+        <input type="text" name="bookmark-list-name" class="js-bookmark-list-name" placeholder="Name">
 
         </div>
 
          <div>
-        <input type="text" name="bookmark-list-url" class="js-bookmark-list-entry" placeholder="URL">
+        <input type="text" name="bookmark-list-url" class="js-bookmark-list-url" placeholder="URL">
         </div>
 
         <div>
-          <input type="text" name="bookmark-list-desc" class="js-bookmark-list-entry" placeholder="Desc.">
+          <input type="text" name="bookmark-list-desc" class="js-bookmark-list-desc" placeholder="Desc.">
           </div>
 
         <select>
@@ -39,8 +39,8 @@
         <button type="submit">Add item</button>
 
     </form>
-
-    <select name = "rating" size = "5">
+    <h2>Sort: </h2>
+    <select name = "rating-sort" size = "5">
       <option value=1>Display ratings above 1</option>
       <option value=2>Display ratings above 2</option>
       <option value=3>Display ratings above 3</option>
@@ -57,7 +57,7 @@
   <script type="text/javascript" src="scripts/api.js"></script> 
   <script type="text/javascript" src="scripts/Item.js"></script>
   <script type="text/javascript" src="scripts/store.js"></script>
-  <script type="text/javascript" src="scripts/handlersandrender.js"></script>
+  <script type="text/javascript" src="scripts/eventHandling.js"></script>
   <script type="text/javascript" src="scripts/index.js"></script>
 
 </body>

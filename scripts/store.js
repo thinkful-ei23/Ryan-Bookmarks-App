@@ -3,7 +3,8 @@
 
 const store = (function(){
   const addItem = function(item) {
-  	this.items.push(item);
+    this.items.push(item);
+    console.log(store);
   };
 
   const findById = function(id) {
